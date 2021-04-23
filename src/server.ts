@@ -3,6 +3,7 @@ import * as auth from 'express-basic-auth';
 import * as cors from 'cors';
 import logger from './utils/logger';
 import * as morgan from 'morgan';
+import * as helmet from 'helmet';
 
 class MyStream {
   write(text: string) {
@@ -12,6 +13,7 @@ class MyStream {
 const stream = new MyStream();
 
 const app = express();
+app.use(helmet());
 app.use(cors());
 app.use(
   auth({
