@@ -36,6 +36,18 @@ describe('quote get should', () => {
       quotes: expectedQuotes,
     });
   });
+  test('return 405 if wrong method', async () => {
+    const expectedToken = faker.datatype.uuid();
+    const expectedUser = faker.random.word();
+    const expectedQuotes = [faker.random.words(), faker.random.words()];
+    getUserFromTokenMock.mockReturnValue(expectedUser);
+    getQuotesForUserMock.mockReturnValue(expectedQuotes);
+    const result = await request(app)
+      .post(`/quotes`)
+      .set('Authorization', `Bearer ${expectedToken}`)
+      .send();
+    expect(result.status).toEqual(405);
+  });
 });
 
 describe('quote get by id should', () => {
@@ -62,5 +74,21 @@ describe('quote get by id should', () => {
       id: expectedQuoteId,
       quote: expectedQuote,
     });
+  });
+  test('return 405 if wrong method', async () => {
+    const expectedToken = faker.datatype.uuid();
+    const expectedUser = faker.random.word();
+    const expectedQuoteId = faker.random.word();
+    const expectedQuote = faker.random.words();
+    getUserFromTokenMock.mockReturnValue(expectedUser);
+    getQuoteForUserByIdMock.mockReturnValue({
+      id: expectedQuoteId,
+      quote: expectedQuote,
+    });
+    const result = await request(app)
+      .post(`/quotes/${expectedQuoteId}`)
+      .set('Authorization', `Bearer ${expectedToken}`)
+      .send();
+    expect(result.status).toEqual(405);
   });
 });
