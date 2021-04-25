@@ -1,8 +1,8 @@
-jest.mock('../../src/routes/authorization', () => ({
+jest.mock('../../src/controllers/authorization', () => ({
   authorization: jest.fn(),
 }));
 
-import { authorization } from '../../src/routes/authorization';
+import { authorization } from '../../src/controllers/authorization';
 import { routesMiddleware } from '../../src/binders/routes-binder';
 describe('route binder', () => {
   test('should add authorization path', async () => {
