@@ -7,6 +7,6 @@ export const quotes = Router();
 quotes.get('/', async (request: CustomRequest, response: Response) => {
   response.send({
     user: request.user,
-    quotes: getQuotesForUser(request.user)
+    quotes: getQuotesForUser(request.user),
   });
 });

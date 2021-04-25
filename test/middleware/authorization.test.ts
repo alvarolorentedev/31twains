@@ -1,12 +1,12 @@
-const getUserFromTokenMock = jest.fn()
-const isTokenValidMock = jest.fn()
-const updateTokenUsageCountMock = jest.fn()
+const getUserFromTokenMock = jest.fn();
+const isTokenValidMock = jest.fn();
+const updateTokenUsageCountMock = jest.fn();
 
 jest.mock('../../src/repository/token', () => ({
   getUserFromToken: getUserFromTokenMock,
   isTokenValid: isTokenValidMock,
-  updateTokenUsageCount: updateTokenUsageCountMock
-}))
+  updateTokenUsageCount: updateTokenUsageCountMock,
+}));
 import * as express from 'express';
 import * as faker from 'faker';
 import * as request from 'supertest';
@@ -70,11 +70,11 @@ describe('bearer auth on quotes endpoint', () => {
   });
 
   beforeEach(() => {
-    updateTokenUsageCountMock.mockReset()
-    getUserFromTokenMock.mockReset()
-    isTokenValidMock.mockReset()
-    getUserFromTokenMock.mockReturnValue(expectedUser)
-    isTokenValidMock.mockReturnValue(true)
+    updateTokenUsageCountMock.mockReset();
+    getUserFromTokenMock.mockReset();
+    isTokenValidMock.mockReset();
+    getUserFromTokenMock.mockReturnValue(expectedUser);
+    isTokenValidMock.mockReturnValue(true);
   });
 
   test('return 401 if no authorization headers are sent', async () => {
@@ -83,36 +83,29 @@ describe('bearer auth on quotes endpoint', () => {
     expect(updateTokenUsageCountMock).not.toBeCalled();
   });
   test('return 401 from endpoint if incorrect authorization headers are sent', async () => {
-    getUserFromTokenMock.mockImplementation(() => {throw new Error("Kaboom")});
+    getUserFromTokenMock.mockImplementation(() => {
+      throw new Error('Kaboom');
+    });
     const result = await request(app)
       .get(`/quotes`)
-      .set(
-        'Authorization',
-        `Bearer ${faker.datatype.uuid()}`
-      )
+      .set('Authorization', `Bearer ${faker.datatype.uuid()}`)
       .send();
     expect(result.status).toEqual(401);
     expect(updateTokenUsageCountMock).not.toBeCalled();
   });
   test('return 401 from endpoint if correct authorization headers are sent but token is not valid', async () => {
-    isTokenValidMock.mockReturnValue(false)
+    isTokenValidMock.mockReturnValue(false);
     const result = await request(app)
       .get(`/quotes`)
-      .set(
-        'Authorization',
-        `Bearer ${expectedToken}`
-      )
+      .set('Authorization', `Bearer ${expectedToken}`)
       .send();
-      expect(result.status).toEqual(401);
-      expect(updateTokenUsageCountMock).not.toBeCalled();
+    expect(result.status).toEqual(401);
+    expect(updateTokenUsageCountMock).not.toBeCalled();
   });
-    test('return response from endpoint if correct authorization headers are sent', async () => {
+  test('return response from endpoint if correct authorization headers are sent', async () => {
     const result = await request(app)
       .get(`/quotes`)
-      .set(
-        'Authorization',
-        `Bearer ${expectedToken}`
-      )
+      .set('Authorization', `Bearer ${expectedToken}`)
       .send();
     expect(result.status).toEqual(200);
     expect(updateTokenUsageCountMock).toBeCalledWith(expectedToken);

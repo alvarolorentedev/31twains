@@ -3,11 +3,17 @@ jest.mock('uuid', () => ({
   v4: uuidMock,
 }));
 import * as faker from 'faker';
-import { generateTokenForUser, getUserFromToken, isTokenValid, updateTokenUsageCount, _ } from '../../src/repository/token';
+import {
+  generateTokenForUser,
+  getUserFromToken,
+  isTokenValid,
+  updateTokenUsageCount,
+  _,
+} from '../../src/repository/token';
 
 describe('token should', () => {
   beforeEach(() => {
-    _.userStore = {}
+    _.userStore = {};
   });
   describe('generateTokenForUser should', () => {
     test('return new token for new user', async () => {
@@ -23,47 +29,44 @@ describe('token should', () => {
   });
 
   describe('getUserFromToken should', () => {
-
     test('return username for exiting token', async () => {
       const expectedToken = faker.datatype.uuid();
       const expectedUser = faker.random.word();
       _.userStore[expectedToken] = {
         user: expectedUser,
         count: 0,
-        validUntil: 0
-      }
-      expect(getUserFromToken(expectedToken)).toBe(expectedUser)
+        validUntil: 0,
+      };
+      expect(getUserFromToken(expectedToken)).toBe(expectedUser);
     });
     test('throw for non exiting token', async () => {
-      expect(() => getUserFromToken(faker.datatype.uuid())).toThrowError()
+      expect(() => getUserFromToken(faker.datatype.uuid())).toThrowError();
     });
   });
   describe('updateTokenUsageCount should', () => {
-
     test('increase token count', async () => {
       const expectedToken = faker.datatype.uuid();
       const expectedUser = faker.random.word();
       _.userStore[expectedToken] = {
         user: expectedUser,
         count: 0,
-        validUntil: 0
-      }
-      updateTokenUsageCount(expectedToken)
-      expect(_.userStore[expectedToken].count).toBe(1)
+        validUntil: 0,
+      };
+      updateTokenUsageCount(expectedToken);
+      expect(_.userStore[expectedToken].count).toBe(1);
     });
   });
   describe('isTokenValid should', () => {
-
     test('be true if count bellow 5 and validUntil in the future', async () => {
       const expectedToken = faker.datatype.uuid();
       const expectedUser = faker.random.word();
       _.userStore[expectedToken] = {
         user: expectedUser,
         count: 4,
-        validUntil: new Date().getTime() + 300000
-      }
-      
-      expect(isTokenValid(expectedToken)).toBe(true)
+        validUntil: new Date().getTime() + 300000,
+      };
+
+      expect(isTokenValid(expectedToken)).toBe(true);
     });
     test('be false if count equal or over 5', async () => {
       const expectedToken = faker.datatype.uuid();
@@ -71,10 +74,10 @@ describe('token should', () => {
       _.userStore[expectedToken] = {
         user: expectedUser,
         count: 5,
-        validUntil: new Date().getTime() + 300000
-      }
-      
-      expect(isTokenValid(expectedToken)).toBe(false)
+        validUntil: new Date().getTime() + 300000,
+      };
+
+      expect(isTokenValid(expectedToken)).toBe(false);
     });
     test('be false if validUntil in the past', async () => {
       const expectedToken = faker.datatype.uuid();
@@ -82,14 +85,10 @@ describe('token should', () => {
       _.userStore[expectedToken] = {
         user: expectedUser,
         count: 0,
-        validUntil: new Date().getTime() - 300000
-      }
-      
-      expect(isTokenValid(expectedToken)).toBe(false)
+        validUntil: new Date().getTime() - 300000,
+      };
+
+      expect(isTokenValid(expectedToken)).toBe(false);
     });
   });
-  
-  
 });
-
-

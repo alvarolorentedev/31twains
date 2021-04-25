@@ -7,7 +7,9 @@ jest.mock('../../src/repository/quotes', () => ({
 jest.mock('../../src/repository/token', () => ({
   getUserFromToken: getUserFromTokenMock,
   isTokenValid: () => true,
-  updateTokenUsageCount: () => {},
+  updateTokenUsageCount: () => {
+    //don't do anything in test
+  },
 }));
 
 import * as faker from 'faker';
@@ -16,23 +18,20 @@ import * as request from 'supertest';
 
 describe('quote get should', () => {
   test('return 200 with quotes for user token', async () => {
-    const expectedToken = faker.datatype.uuid()
-    const expectedUser = faker.random.word()
-    const expectedQuotes =  [faker.random.words(), faker.random.words()]
-    getUserFromTokenMock.mockReturnValue(expectedUser)
-    getQuotesForUserMock.mockReturnValue(expectedQuotes)
+    const expectedToken = faker.datatype.uuid();
+    const expectedUser = faker.random.word();
+    const expectedQuotes = [faker.random.words(), faker.random.words()];
+    getUserFromTokenMock.mockReturnValue(expectedUser);
+    getQuotesForUserMock.mockReturnValue(expectedQuotes);
     const result = await request(app)
       .get(`/quotes`)
-      .set(
-        'Authorization',
-        `Bearer ${expectedToken}`
-      )
+      .set('Authorization', `Bearer ${expectedToken}`)
       .send();
     expect(result.status).toEqual(200);
     expect(getQuotesForUserMock).toBeCalledWith(expectedUser);
-    expect(result.body).toEqual({ 
+    expect(result.body).toEqual({
       user: expectedUser,
-      quotes: expectedQuotes 
+      quotes: expectedQuotes,
     });
   });
 });
