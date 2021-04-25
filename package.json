@@ -19,6 +19,10 @@
     "migrate:remote:down": "db-migrate down -e production",
     "migrate:create": "db-migrate create"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "repository": "git@github.com:kanekotic/31twains.git",
   "author": "kanekotic <alvarojosepl@gmail.com>",
   "private": true,
@@ -54,6 +58,7 @@
     "faker": "5.5.3",
     "jest": "26.6.3",
     "nodemon": "2.0.7",
+    "pre-commit": "1.2.2",
     "prettier": "2.2.1",
     "sqlite3": "5.0.2",
     "supertest": "6.1.3",
