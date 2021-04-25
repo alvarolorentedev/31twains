@@ -25,4 +25,19 @@ describe('authorization get should', () => {
     expect(generateTokenForUserMock).toBeCalledWith(process.env.USERNAME);
     expect(result.body).toEqual({ token: expectedToken });
   });
+  test('return 405 with token if correct authorization headers are sent on correct path with wrong method', async () => {
+    const expectedToken = faker.datatype.uuid();
+    generateTokenForUserMock.mockReturnValue(expectedToken);
+    const result = await request(app)
+      .post(`/auth`)
+      .set(
+        'Authorization',
+        `Basic ${Buffer.from(
+          `${process.env.USERNAME}:${process.env.PASSWORD}`,
+          'utf-8'
+        ).toString('base64')}`
+      )
+      .send();
+    expect(result.status).toEqual(405);
+  });
 });
