@@ -6,10 +6,10 @@
 	},
 	"item": [
 		{
-			"name": "Auth",
+			"name": "1.Auth",
 			"item": [
 				{
-					"name": "Get",
+					"name": "1.Get",
 					"event": [
 						{
 							"listen": "test",
@@ -53,6 +53,56 @@
 							],
 							"path": [
 								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2.Quotes",
+			"item": [
+				{
+					"name": "1.Get quotes for user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"to have user and quotes on the body\", function () {",
+									"    pm.expect(pm.response.json().user).to.not.be.undefined;",
+									"    pm.expect(pm.response.json().quotes).to.not.be.undefined;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sessionToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/quotes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quotes"
 							]
 						}
 					},
