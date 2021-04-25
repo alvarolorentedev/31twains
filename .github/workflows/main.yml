@@ -39,6 +39,8 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP: ${{ secrets.HEROKU_APP }}
+    - name: Install
+      run: npm install -g newman
     - name: Setup Integration
       run: node ./postman/replaceFileFromEnvironment.js
       env:
@@ -47,9 +49,6 @@ jobs:
     - name: Wait Service to be operational
       uses: jakejarvis/wait-action@master
       with:
-        time: '60s'
+        time: '20s'
     - name: Run Integration
-      uses: matt-ball/newman-action@master
-      with:
-        collection: postman/31twains.postman_collection.json
-        environment: postman/smoke.postman_environment.json
+      run: newman run postman/31twains.postman_collection.json --environment postman/smoke.postman_environment.json
