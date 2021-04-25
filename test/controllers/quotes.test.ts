@@ -1,8 +1,10 @@
 const getQuotesForUserMock = jest.fn();
+const getQuoteForUserByIdMock = jest.fn();
 const getUserFromTokenMock = jest.fn();
 
 jest.mock('../../src/repository/quotes', () => ({
   getQuotesForUser: getQuotesForUserMock,
+  getQuoteForUserById: getQuoteForUserByIdMock,
 }));
 jest.mock('../../src/repository/token', () => ({
   getUserFromToken: getUserFromTokenMock,
@@ -34,4 +36,29 @@ describe('quote get should', () => {
       quotes: expectedQuotes,
     });
   });
+});
+
+describe('quote get by id should', () => {
+  test('return 200 with correct quote if exists', async () => {
+    const expectedToken = faker.datatype.uuid();
+    const expectedUser = faker.random.word();
+    const expectedQuoteId = faker.random.word();
+    const expectedQuote = faker.random.words();
+    getUserFromTokenMock.mockReturnValue(expectedUser);
+    getQuoteForUserByIdMock.mockReturnValue({
+      id: expectedQuoteId,
+      quote: expectedQuote
+    });
+    const result = await request(app)
+      .get(`/quotes/${expectedQuoteId}`)
+      .set('Authorization', `Bearer ${expectedToken}`)
+      .send();
+    expect(result.status).toEqual(200);
+    expect(getQuoteForUserByIdMock).toBeCalledWith(expectedUser, expectedQuoteId);
+    expect(result.body).toEqual({
+      id: expectedQuoteId,
+      quote: expectedQuote
+    });
+  });
+  
 });
