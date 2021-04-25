@@ -1,14 +1,12 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
-const tokenStore = {
+const tokenStore = {};
 
-}
-
-export const generateTokenForUser = (user: string) => {
-    tokenStore[user]={
-        token: uuid(),
-        count: 1,
-        createdOn: new Date().getTime()
-    }
-    return tokenStore[user].token
+export const generateTokenForUser = (user: string): string => {
+  tokenStore[user] = {
+    token: uuid(),
+    count: 1,
+    createdOn: new Date().getTime(),
+  };
+  return tokenStore[user].token;
 };

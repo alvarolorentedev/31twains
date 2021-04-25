@@ -3,8 +3,8 @@ import * as cors from 'cors';
 import logger from './utils/logger';
 import * as morgan from 'morgan';
 import * as helmet from 'helmet';
-import { routesMiddleware } from "./binders/routes-binder";
-import { authorization } from "./middlerware/authorization"
+import { routesMiddleware } from './binders/routes-binder';
+import { authorization } from './middlerware/authorization';
 
 class MyStream {
   write(text: string) {
@@ -19,4 +19,4 @@ app.use(cors());
 app.use(authorization);
 app.use(morgan('tiny', { stream }));
 
-routesMiddleware(app)
+routesMiddleware(app);

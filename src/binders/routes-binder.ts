@@ -1,6 +1,6 @@
-import { Application } from "express";
-import { authorization } from "../routes/authorization";
+import { Application } from 'express';
+import { authorization } from '../routes/authorization';
 
-export const routesMiddleware = (app: Application) => {
-    app.use('/auth', authorization)
-}
+export const routesMiddleware = (app: Application): void => {
+  app.use('/auth', authorization);
+};

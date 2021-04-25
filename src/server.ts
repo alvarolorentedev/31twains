@@ -1,4 +1,4 @@
-import { app } from "./app";
+import { app } from './app';
 
 app.listen({ port: process.env.PORT || 8080 }, () =>
   console.log(
