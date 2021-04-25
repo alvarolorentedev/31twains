@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "resolveJsonModule": true
     },
     "include": ["src/**/*", "src/custom.d.ts"],
     "exclude": ["node_modules", "**/*.test.ts"]
