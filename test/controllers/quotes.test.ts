@@ -47,18 +47,20 @@ describe('quote get by id should', () => {
     getUserFromTokenMock.mockReturnValue(expectedUser);
     getQuoteForUserByIdMock.mockReturnValue({
       id: expectedQuoteId,
-      quote: expectedQuote
+      quote: expectedQuote,
     });
     const result = await request(app)
       .get(`/quotes/${expectedQuoteId}`)
       .set('Authorization', `Bearer ${expectedToken}`)
       .send();
     expect(result.status).toEqual(200);
-    expect(getQuoteForUserByIdMock).toBeCalledWith(expectedUser, expectedQuoteId);
+    expect(getQuoteForUserByIdMock).toBeCalledWith(
+      expectedUser,
+      expectedQuoteId
+    );
     expect(result.body).toEqual({
       id: expectedQuoteId,
-      quote: expectedQuote
+      quote: expectedQuote,
     });
   });
-  
 });

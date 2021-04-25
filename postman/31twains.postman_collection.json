@@ -21,8 +21,10 @@
 									"",
 									"pm.test(\"to have token on the body\", function () {",
 									"    pm.expect(pm.response.json().token).to.not.be.undefined;",
-									"    pm.environment.set(\"sessionToken\", pm.response.json().token);",
-									"});"
+									"});",
+									"",
+									"//extract data for future requests",
+									"pm.environment.set(\"sessionToken\", pm.response.json().token);"
 								],
 								"type": "text/javascript"
 							}
@@ -77,7 +79,11 @@
 									"pm.test(\"to have user and quotes on the body\", function () {",
 									"    pm.expect(pm.response.json().user).to.not.be.undefined;",
 									"    pm.expect(pm.response.json().quotes).to.not.be.undefined;",
-									"});"
+									"});",
+									"",
+									"//extract data for future requests",
+									"pm.environment.set(\"firstQuoteId\", pm.response.json().quotes[0].id);",
+									"pm.environment.set(\"firstQuoteText\", pm.response.json().quotes[0].quote);"
 								],
 								"type": "text/javascript"
 							}
@@ -103,6 +109,53 @@
 							],
 							"path": [
 								"quotes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.Get quotes for user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"to have correct id and quote on the body\", function () {",
+									"    pm.expect(pm.response.json().id).to.be.eq(pm.environment.get(\"firstQuoteId\"));",
+									"    pm.expect(pm.response.json().quote).to.be.eq(pm.environment.get(\"firstQuoteText\"));",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sessionToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/quotes/{{firstQuoteId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quotes",
+								"{{firstQuoteId}}"
 							]
 						}
 					},
