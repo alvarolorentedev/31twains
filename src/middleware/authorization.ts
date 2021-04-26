@@ -6,36 +6,62 @@ import {
 } from '../repository/token';
 import { CustomRequest } from '../types/custom-request';
 
+const authorizationRuleEngine = [
+  {
+    shouldApply: (request: CustomRequest): boolean =>
+      request.path && request.path.startsWith('/share'),
+    authorize: (): boolean => true,
+  },
+  {
+    shouldApply: (request: CustomRequest): boolean =>
+      request.path &&
+      request.path === '/auth' &&
+      request.headers.authorization &&
+      request.headers.authorization.startsWith('Basic'),
+    authorize: (request: CustomRequest): boolean => {
+      const base64Token = request.headers.authorization.replace('Basic ', '');
+      const [user, password] = Buffer.from(base64Token, 'base64')
+        .toString('utf-8')
+        .split(':');
+      if (user !== process.env.USERNAME && password !== process.env.PASSWORD) {
+        return false;
+      }
+      request.user = user;
+      return true;
+    },
+  },
+  {
+    shouldApply: (request: CustomRequest): boolean =>
+      request.headers.authorization &&
+      request.headers.authorization.startsWith('Bearer'),
+    authorize: (request: CustomRequest): boolean => {
+      try {
+        const token = request.headers.authorization.replace('Bearer ', '');
+        const user = getUserFromToken(token);
+        if (user && !isTokenValid(token)) return false;
+        updateTokenUsageCount(token);
+        request.user = user;
+        return true;
+      } catch (error) {
+        return false;
+      }
+    },
+  },
+
+  {
+    shouldApply: (request: CustomRequest): boolean => true,
+    authorize: (request: CustomRequest): boolean => false,
+  },
+];
+
 export const authorization = (
   request: CustomRequest,
   response: Response,
   next: () => void
 ): void => {
-  try {
-    const authorizationHeader = request.headers.authorization;
-    if (request.path.startsWith('/share')) {
-      //public route
-    } else if (
-      request.path === '/auth' &&
-      authorizationHeader.startsWith('Basic')
-    ) {
-      const base64Token = authorizationHeader.replace('Basic ', '');
-      const [user, password] = Buffer.from(base64Token, 'base64')
-        .toString('utf-8')
-        .split(':');
-      if (user !== process.env.USERNAME && password !== process.env.PASSWORD) {
-        throw new Error('Invalid Credentials');
-      }
-      request.user = user;
-    } else if (authorizationHeader.startsWith('Bearer')) {
-      const token = authorizationHeader.replace('Bearer ', '');
-      const user = getUserFromToken(token);
-      if (user && !isTokenValid(token)) throw new Error('Expired Credentials');
-      updateTokenUsageCount(token);
-      request.user = user;
-    } else throw new Error('Invalid Credentials');
-    next();
-  } catch (error) {
-    response.status(401).send();
-  }
+  const isAuthorized = authorizationRuleEngine
+    .find((rule) => rule.shouldApply(request))
+    .authorize(request);
+  if (isAuthorized) next();
+  else response.status(401).send();
 };
