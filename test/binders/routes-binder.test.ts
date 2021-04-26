@@ -1,17 +1,31 @@
 jest.mock('../../src/controllers/authorization', () => ({
   authorization: jest.fn(),
 }));
+jest.mock('../../src/controllers/quotes', () => ({
+  authorization: jest.fn(),
+}));
 
 import { authorization } from '../../src/controllers/authorization';
-import { routesMiddleware } from '../../src/binders/routes-binder';
+import { quotes } from '../../src/controllers/quotes';
+import { routesBinder } from '../../src/binders/routes-binder';
+import { Application } from 'express';
 describe('route binder', () => {
   test('should add authorization path', async () => {
-    const appMock = {
+    const appMock = ({
       use: jest.fn(),
-    };
-    //@ts-ignore
-    routesMiddleware(appMock);
+    } as unknown) as Application;
+
+    routesBinder(appMock);
 
     expect(appMock.use).toBeCalledWith('/auth', authorization);
+  });
+  test('should add quotes path', async () => {
+    const appMock = ({
+      use: jest.fn(),
+    } as unknown) as Application;
+
+    routesBinder(appMock);
+
+    expect(appMock.use).toBeCalledWith('/quotes', quotes);
   });
 });

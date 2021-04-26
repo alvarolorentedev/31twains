@@ -11,7 +11,7 @@ import * as express from 'express';
 import * as faker from 'faker';
 import * as request from 'supertest';
 import { Request, Response } from 'express';
-import { authorization } from '../../src/middlerware/authorization';
+import { authorization } from '../../src/middleware/authorization';
 
 describe('basic auth on auth endpoint', () => {
   const expectedUser = process.env.USERNAME;
