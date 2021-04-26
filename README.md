@@ -1,10 +1,14 @@
 # ![LogoMakr-04nw3H](https://user-images.githubusercontent.com/3071208/116048358-61f89e80-a675-11eb-91cd-2af6a84a107c.png)
 
+## Current Architecture
+TODO
+## Future Architecture
+TODO
 ## Project Structure
 
  ```
 .
-├── src                                                     // Source Code
+├── src                                                     
 │   ├── server.ts                                           // Entrypoint
 │   ├── app.ts                                              // Express server
 │   ├── binders                                             // Bindings
@@ -17,14 +21,14 @@
 ├── test                                                    // Tests
 │
 ├── postman                                                 //postman collection for E2E
-│   ├── 31twains\ -\ local.postman_environment.json         // postman local variables
-│   ├── 31twains\ -\ remote.postman_environment.json        // postman remote variables
-│   ├── 31twains.postman_collection.json                    // collection endpoints
-│   └── replaceFileFromEnvironment.js                       // script to setup e2e test
+│
+├── .github                                               
+│   └── workflows    
+│       └── main.yml                                        //CI/CD definition 
 │
 ├── Dockerfile                                              // Docker file for app release    
 ├── README.md                                               // This documentation file
-├── package.json                                            // Project definition and configuration
+├── package.json                                            // Project file
 ├── package-lock.json                                       // Dependencies reference
 ├── quotes.json                                             // initial data
 └── tsconfig.json                                           // typescript configuration
