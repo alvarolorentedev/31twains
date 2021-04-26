@@ -59,8 +59,12 @@ Requires `Node` and run `npm install` or have `docker`.
 | 2021-04-25 | Design   | Local Stores accessibility | currently only using dictionary as store for MVP without DB. Also gives accessibility for testing purpose that will be removed when DB is in place and tools like test container can be used for this boundary test |
 
 ## Current Architecture
+### App
 ![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
+### Pipeline
 ![Blank diagram - pipeline](https://user-images.githubusercontent.com/3071208/116080690-ae55d580-a699-11eb-812f-699769c8cbf7.jpeg)
 ## Future Architecture
+### App
 ![Blank diagram - Future Architecture (1)](https://user-images.githubusercontent.com/3071208/116080687-ad24a880-a699-11eb-806e-526477ff7853.jpeg)
+### Pipeline
 ![Blank diagram - pipeline future](https://user-images.githubusercontent.com/3071208/116080692-af870280-a699-11eb-9c68-8accc0475180.jpeg)
