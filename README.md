@@ -1,11 +1,5 @@
 # ![LogoMakr-04nw3H](https://user-images.githubusercontent.com/3071208/116048358-61f89e80-a675-11eb-91cd-2af6a84a107c.png)
 
-## Current Architecture
-![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
-![Blank diagram - pipeline](https://user-images.githubusercontent.com/3071208/116080690-ae55d580-a699-11eb-812f-699769c8cbf7.jpeg)
-## Future Architecture
-![Blank diagram - Future Architecture (1)](https://user-images.githubusercontent.com/3071208/116080687-ad24a880-a699-11eb-806e-526477ff7853.jpeg)
-![Blank diagram - pipeline future](https://user-images.githubusercontent.com/3071208/116080692-af870280-a699-11eb-9c68-8accc0475180.jpeg)
 ## Project Structure
 
  ```
@@ -46,3 +40,10 @@
 | 2021-04-25 | Design   | multiple token per user    | for MVP purposes a user will have a multiple reference to token based on calls to auth endpoint. A post MVP process should clean this        |
 | 2021-04-25 | Design   | Unauthorization precedence | authorization will take precedence over other possible errors to remove attack vectors of unauthorized entities to explore existing endpoints |
 | 2021-04-25 | Design   | Local Stores accessibility | currently only using dictionary as store for MVP without DB. Also gives accessibility for testing purpose that will be removed when DB is in place and tools like test container can be used for this boundary test |
+
+## Current Architecture
+![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
+![Blank diagram - pipeline](https://user-images.githubusercontent.com/3071208/116080690-ae55d580-a699-11eb-812f-699769c8cbf7.jpeg)
+## Future Architecture
+![Blank diagram - Future Architecture (1)](https://user-images.githubusercontent.com/3071208/116080687-ad24a880-a699-11eb-806e-526477ff7853.jpeg)
+![Blank diagram - pipeline future](https://user-images.githubusercontent.com/3071208/116080692-af870280-a699-11eb-9c68-8accc0475180.jpeg)
