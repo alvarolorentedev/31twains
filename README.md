@@ -2,9 +2,10 @@
 
 ## Current Architecture
 ![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
-
+![Blank diagram - pipeline](https://user-images.githubusercontent.com/3071208/116080690-ae55d580-a699-11eb-812f-699769c8cbf7.jpeg)
 ## Future Architecture
-![Blank diagram - Future Architecture](https://user-images.githubusercontent.com/3071208/116071560-5796ce80-a68e-11eb-8fde-e01cfbbfe398.jpeg)
+![Blank diagram - Future Architecture (1)](https://user-images.githubusercontent.com/3071208/116080687-ad24a880-a699-11eb-806e-526477ff7853.jpeg)
+![Blank diagram - pipeline future](https://user-images.githubusercontent.com/3071208/116080692-af870280-a699-11eb-9c68-8accc0475180.jpeg)
 ## Project Structure
 
  ```
