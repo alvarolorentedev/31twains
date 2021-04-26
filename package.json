@@ -6,7 +6,7 @@
   "scripts": {
     "test": "USERNAME=test PASSWORD=test jest",
     "test:dev": "USERNAME=test PASSWORD=test jest --watchAll",
-    "test:cov": "USERNAME=test PASSWORD=test jest --coverage && cat ./coverage/lcov.info",
+    "test:cov": "USERNAME=test PASSWORD=test  npm test -- --coverage --collectCoverageFrom=src/**/*.ts",
     "start:local": "NODE_ENV=development ts-node .",
     "start": "NODE_ENV=production ts-node .",
     "start:dev": "NODE_ENV=development USERNAME=test PASSWORD=test ts-node-dev --poll .",
