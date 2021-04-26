@@ -1,9 +1,10 @@
 # ![LogoMakr-04nw3H](https://user-images.githubusercontent.com/3071208/116048358-61f89e80-a675-11eb-91cd-2af6a84a107c.png)
 
 ## Current Architecture
-TODO
+![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
+
 ## Future Architecture
-TODO
+![Blank diagram - Future Architecture](https://user-images.githubusercontent.com/3071208/116071560-5796ce80-a68e-11eb-8fde-e01cfbbfe398.jpeg)
 ## Project Structure
 
  ```
