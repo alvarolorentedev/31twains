@@ -2,7 +2,7 @@
 
 ## How to
 
-## Dependencies
+### Dependencies
 
 Requires `Node` and run `npm install` or have `docker`. 
 
