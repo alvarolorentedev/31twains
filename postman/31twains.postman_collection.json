@@ -160,6 +160,95 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "3.share quotes by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"to have correct share_url on the body\", function () {",
+									"    pm.expect(pm.response.json().share_url).to.not.be.undefined;",
+									"});",
+									"",
+									"//extract data for future requests",
+									"pm.environment.set(\"shareUrl\", pm.response.json().share_url);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{sessionToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/quotes/{{firstQuoteId}}/share",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quotes",
+								"{{firstQuoteId}}",
+								"share"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3.Share",
+			"item": [
+				{
+					"name": "1.Get Shared Quote",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"to have correct quote on the body\", function () {",
+									"    pm.expect(pm.response.json().quote).to.be.eq(pm.environment.get(\"firstQuoteText\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}{{shareUrl}}",
+							"host": [
+								"{{url}}{{shareUrl}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -58,6 +58,8 @@ Requires `Node` and run `npm install` or have `docker`.
 | 2021-04-25 | Design   | multiple token per user    | for MVP purposes a user will have a multiple reference to token based on calls to auth endpoint. A post MVP process should clean this        |
 | 2021-04-25 | Design   | Unauthorization precedence | authorization will take precedence over other possible errors to remove attack vectors of unauthorized entities to explore existing endpoints |
 | 2021-04-25 | Design   | Local Stores accessibility | currently only using dictionary as store for MVP without DB. Also gives accessibility for testing purpose that will be removed when DB is in place and tools like test container can be used for this boundary test |
+| 2021-04-26 | Recommendation   | Not use 405 | 405 wont help machines to fix the issue it only helps attackers to recognize the endpoint exist with a different method |
+| 2021-04-26 | Recommendation   | No GET method with side effects | the get endpoint that generates a link is semantically incorrect for a REST API as it generates a record. It should be a Post in share with the shareId |
 
 ## Current Architecture
 ### App
