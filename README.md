@@ -8,7 +8,7 @@
 │   ├── server.ts                                           // Entrypoint
 │   ├── app.ts                                              // Express server
 │   ├── binders                                             // Bindings
-│   ├── middleware                                          // middlewares
+│   ├── middleware                                          // middleware
 │   ├── controllers                                         // api routes
 │   ├── repository                                          // data access layer
 │   ├── types                                               // type definitions
@@ -35,7 +35,7 @@
 |------------|----------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | 2021-04-23 | Practice | Trunk Based Development    | Only one branch and control deployments by feature toggles or abstractions                                                                   |
 | 2021-04-23 | Practice | TDD                        | Write test first to generate minimal code that works                                                                                         |
-| 2021-04-23 | Practice | Deploy directly to prod    | Only one environment to reduce costs and understand real performance and behaviour                                                           |
+| 2021-04-23 | Practice | Deploy directly to prod    | Only one environment to reduce costs and understand real performance and behavior                                                           |
 | 2021-04-23 | Practice | Observability              | Have logs and metrics for prod deployments                                                                                                   |
-| 2021-04-25 | Desing   | multiple token per user    | for MVP purposes a user will have a multiple reference to token based on calls to auth endpoint. A post MVP process should clean this        |
-| 2021-04-25 | Desing   | Unauthorization presedence | authorization will take precedence over other possible errors to remove atack vectors of unauthorized entities to explore exisitng endpoints |
+| 2021-04-25 | Design   | multiple token per user    | for MVP purposes a user will have a multiple reference to token based on calls to auth endpoint. A post MVP process should clean this        |
+| 2021-04-25 | Design   | Unauthorization precedence | authorization will take precedence over other possible errors to remove attack vectors of unauthorized entities to explore existing endpoints || 2021-04-25 | Design   | Local Stores accessibility | currently only using dictionary as store for MVP without DB. Also gives accessibility for testing purpose that will be removed when DB is in place and tools like test container can be used for this boundary test |
