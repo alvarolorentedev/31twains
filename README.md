@@ -1,5 +1,22 @@
 # ![LogoMakr-04nw3H](https://user-images.githubusercontent.com/3071208/116048358-61f89e80-a675-11eb-91cd-2af6a84a107c.png)
 
+## How to
+
+## Dependencies
+
+Requires `Node` and run `npm install`. 
+
+### Run Locally
+* `npm run start:local`: start local environment
+* `npm run start:dev`: start local environment with hot reload on changes
+* `npm run start`: start production code
+* `docker build -t "31twains-local" . && docker run -it -e NODE_ENV=development -e USERNAME=test -e PASSWORD=test 31twains-local:latest` : Run using docker container
+
+### Run Test
+* `npm run test`: runs test
+* `npm run test:dev`: runs test with hot reload on changes
+* `npm run test:cov`: runs tests with coverage
+
 ## Project Structure
 
  ```
