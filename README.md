@@ -4,7 +4,7 @@
 
 ## Dependencies
 
-Requires `Node` and run `npm install`. 
+Requires `Node` and run `npm install` or have `docker`. 
 
 ### Run Locally
 * `npm run start:local`: start local environment
