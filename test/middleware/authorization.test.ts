@@ -13,6 +13,25 @@ import * as request from 'supertest';
 import { Request, Response } from 'express';
 import { authorization } from '../../src/middleware/authorization';
 
+describe('no auth in share endpoint', () => {
+  const expectedUser = process.env.USERNAME;
+  const app = express();
+  beforeAll(() => {
+    app.use(authorization);
+    app.get('/share/:shareId', (req: Request, res: Response) => {
+      //@ts-ignore
+      res.sendStatus(200);
+    });
+  });
+
+  test('return 200 with no authorization header', async () => {
+    const result = await request(app)
+      .get(`/share/${faker.datatype.uuid()}`)
+      .send();
+    expect(result.status).toEqual(200);
+  });
+});
+
 describe('basic auth on auth endpoint', () => {
   const expectedUser = process.env.USERNAME;
   const app = express();

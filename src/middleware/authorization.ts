@@ -13,7 +13,12 @@ export const authorization = (
 ): void => {
   try {
     const authorizationHeader = request.headers.authorization;
-    if (request.path === '/auth' && authorizationHeader.startsWith('Basic')) {
+    if (request.path.startsWith('/share')) {
+      //public route
+    } else if (
+      request.path === '/auth' &&
+      authorizationHeader.startsWith('Basic')
+    ) {
       const base64Token = authorizationHeader.replace('Basic ', '');
       const [user, password] = Buffer.from(base64Token, 'base64')
         .toString('utf-8')
