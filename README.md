@@ -61,7 +61,14 @@ Requires `Node` and run `npm install` or have `docker`.
 | 2021-04-26 | Recommendation   | Not use 405 | 405 wont help machines to fix the issue it only helps attackers to recognize the endpoint exist with a different method |
 | 2021-04-26 | Recommendation   | No GET method with side effects | the get endpoint that generates a link is semantically incorrect for a REST API as it generates a record. It should be a Post in share with the shareId |
 
+## Next Steps - Technical Debt
+* Use database and not in memory storage.
+* Find a way to better handle failure. I decided to use exceptions to prevent wrong concepts of null. 
+* Use specific domain exception and handle expected exceptions
+* Improve error response returning a cause/code
+
 ## Current Architecture
+
 ### App
 ![Blank diagram - Current Architecture](https://user-images.githubusercontent.com/3071208/116071555-55cd0b00-a68e-11eb-8241-240bfdd8ec80.jpeg)
 ### Pipeline
