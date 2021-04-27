@@ -6,6 +6,7 @@ import {
 } from '../repository/token';
 import { AuthorizationInfo } from '../types/auth-info';
 import { CustomRequest } from '../types/custom-request';
+import logger from '../utils/logger';
 
 const BasicTokenAuth = (request: CustomRequest): AuthorizationInfo => {
   const base64Token = request.headers.authorization.replace('Basic ', '');
@@ -67,5 +68,6 @@ export const authorization = (
     next();
   } catch (error) {
     response.status(401).send();
+    logger.warning(error);
   }
 };
