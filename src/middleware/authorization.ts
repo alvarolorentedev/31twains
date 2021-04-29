@@ -6,6 +6,7 @@ import {
 } from '../repository/token';
 import { AuthorizationInfo } from '../types/auth-info';
 import { CustomRequest } from '../types/custom-request';
+import { InvalidToken } from '../types/errors';
 import logger from '../utils/logger';
 
 const BasicTokenAuth = (request: CustomRequest): AuthorizationInfo => {
@@ -14,14 +15,14 @@ const BasicTokenAuth = (request: CustomRequest): AuthorizationInfo => {
     .toString('utf-8')
     .split(':');
   if (user !== process.env.USERNAME && password !== process.env.PASSWORD)
-    throw Error('Wrong Credentials');
+    throw new InvalidToken('Wrong Credentials');
   return { user };
 };
 
 const BearerTokenAuth = (request: CustomRequest): AuthorizationInfo => {
   const token = request.headers.authorization.replace('Bearer ', '');
   const user = getUserFromToken(token);
-  if (user && !isTokenValid(token)) throw Error('Wrong Credentials');
+  if (user && !isTokenValid(token)) throw new InvalidToken('Wrong Credentials');
   updateTokenUsageCount(token);
   return { user };
 };
@@ -50,7 +51,7 @@ const authorizationRuleEngine = [
   {
     shouldApply: (request: CustomRequest): boolean => true,
     authorize: (): AuthorizationInfo => {
-      throw Error('Wrong Credentials');
+      throw new InvalidToken('Wrong Credentials');
     },
   },
 ];

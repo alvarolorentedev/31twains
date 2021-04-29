@@ -61,11 +61,9 @@ Requires `Node` and run `npm install` or have `docker`.
 | 2021-04-26 | Recommendation   | Not use 405 | 405 wont help machines to fix the issue it only helps attackers to recognize the endpoint exist with a different method |
 | 2021-04-26 | Recommendation   | No GET method with side effects | the get endpoint that generates a link is semantically incorrect for a REST API as it generates a record. It should be a Post in share with the shareId |
 
-## Next Steps - Technical Debt
+## Next Steps
 * Use database and not in memory storage.
-* Find a way to better handle failure. I decided to use exceptions to prevent wrong concepts of null. 
-* Use specific domain exception and handle expected exceptions
-* Improve error response returning a cause/code
+* Use less basic types to be pass around and use more extensible domain objects
 
 ## Current Architecture
 
@@ -78,3 +76,36 @@ Requires `Node` and run `npm install` or have `docker`.
 ![Blank diagram - Future Architecture (1)](https://user-images.githubusercontent.com/3071208/116080687-ad24a880-a699-11eb-806e-526477ff7853.jpeg)
 ### Pipeline
 ![Blank diagram - pipeline future](https://user-images.githubusercontent.com/3071208/116080692-af870280-a699-11eb-9c68-8accc0475180.jpeg)
+
+## Metrics
+
+### Code Coverage
+```
+-----------------------|---------|----------|---------|---------|-------------------
+File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-----------------------|---------|----------|---------|---------|-------------------
+All files              |   97.56 |    86.84 |   97.14 |   97.22 |                   
+ src                   |      75 |        0 |       0 |      75 |                   
+  app.ts               |     100 |      100 |     100 |     100 |                   
+  server.ts            |       0 |        0 |       0 |       0 | 1-4               
+ src/binders           |     100 |      100 |     100 |     100 |                   
+  middleware-binder.ts |     100 |      100 |     100 |     100 |                   
+  routes-binder.ts     |     100 |      100 |     100 |     100 |                   
+ src/controllers       |     100 |      100 |     100 |     100 |                   
+  authorization.ts     |     100 |      100 |     100 |     100 |                   
+  quotes.ts            |     100 |      100 |     100 |     100 |                   
+  share.ts             |     100 |      100 |     100 |     100 |                   
+ src/middleware        |     100 |      100 |     100 |     100 |                   
+  authorization.ts     |     100 |      100 |     100 |     100 |                   
+  error-handler.ts     |     100 |      100 |     100 |     100 |                   
+ src/repository        |     100 |      100 |     100 |     100 |                   
+  quotes.ts            |     100 |      100 |     100 |     100 |                   
+  share.ts             |     100 |      100 |     100 |     100 |                   
+  token.ts             |     100 |      100 |     100 |     100 |                   
+ src/types             |     100 |      100 |     100 |     100 |                   
+  errors.ts            |     100 |      100 |     100 |     100 |                   
+ src/utils             |   90.91 |       50 |     100 |      90 |                   
+  logger.ts            |   85.71 |       50 |     100 |   85.71 | 16                
+  not-allowed.ts       |     100 |      100 |     100 |     100 |                   
+-----------------------|---------|----------|---------|---------|-------------------
+```

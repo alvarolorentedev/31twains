@@ -12,6 +12,7 @@ import * as faker from 'faker';
 import * as request from 'supertest';
 import { Request, Response } from 'express';
 import { authorization } from '../../src/middleware/authorization';
+import { InvalidToken } from '../../src/types/errors';
 
 describe('no auth in share endpoint', () => {
   const expectedUser = process.env.USERNAME;
@@ -103,7 +104,7 @@ describe('bearer auth on quotes endpoint', () => {
   });
   test('return 401 from endpoint if incorrect authorization headers are sent', async () => {
     getUserFromTokenMock.mockImplementation(() => {
-      throw new Error('Kaboom');
+      throw new InvalidToken('Kaboom');
     });
     const result = await request(app)
       .get(`/quotes`)
