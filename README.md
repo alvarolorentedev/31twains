@@ -2,8 +2,10 @@
 
 ## Motivation
 Simple server side exercise, it will be evaluated using a test suite that checks the constraints to assert the business logic is correct and by Onna engineers on a less objective approach to check overall architecture.
+
 ## Live version
 please use the provided postman collections to interact with the love version in heroku hosted under `https://twains31.herokuapp.com`
+
 ## How to Run
 
 ### Dependencies
@@ -54,6 +56,8 @@ Requires `Node` and run `npm install` or have `docker`.
 
 | Date       | Type     | Header                     | Definition                                                                                                                                   |
 |------------|----------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| 2021-04-23 | Practice | Kanban    | used [Kanban board + issues](https://github.com/kanekotic/31twains/projects/1) to track stories and with correct set of acceptance criteria                                                                   |
+| 2021-04-23 | Practice | CI/CD    | Have pipeline to validate, reprocude status and deploy using github actions [Kanban board + issues](https://github.com/kanekotic/31twains/actions)                                                         |
 | 2021-04-23 | Practice | Trunk Based Development    | Only one branch and control deployments by feature toggles or abstractions                                                                   |
 | 2021-04-23 | Practice | TDD                        | Write test first to generate minimal code that works                                                                                         |
 | 2021-04-23 | Practice | Deploy directly to prod    | Only one environment to reduce costs and understand real performance and behavior                                                           |
