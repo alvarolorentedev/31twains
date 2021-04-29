@@ -1,6 +1,10 @@
 # ![LogoMakr-04nw3H](https://user-images.githubusercontent.com/3071208/116048358-61f89e80-a675-11eb-91cd-2af6a84a107c.png)
 
-## How to
+## Motivation
+Simple server side exercise, it will be evaluated using a test suite that checks the constraints to assert the business logic is correct and by Onna engineers on a less objective approach to check overall architecture.
+## Live version
+please use the provided postman collections to interact with the love version in heroku hosted under `https://twains31.herokuapp.com`
+## How to Run
 
 ### Dependencies
 
