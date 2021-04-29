@@ -7,7 +7,7 @@ export const authorization = Router();
 
 authorization
   .route('/')
-  .get(async (request: CustomRequest, response: Response) => {
+  .get((request: CustomRequest, response: Response) => {
     response.send({
       token: generateTokenForUser(request.user),
     });

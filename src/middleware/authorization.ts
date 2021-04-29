@@ -67,7 +67,7 @@ export const authorization = (
     request.user = user;
     next();
   } catch (error) {
-    response.status(401).send();
+    response.status(401).send({ error });
     logger.warning(error);
   }
 };

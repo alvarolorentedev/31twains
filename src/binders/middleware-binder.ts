@@ -3,6 +3,7 @@ import logger from '../utils/logger';
 import * as morgan from 'morgan';
 import * as helmet from 'helmet';
 import { authorization } from '../middleware/authorization';
+import { errorHandler } from '../middleware/error-handler';
 
 class LoggingStream {
   write(text: string) {
@@ -10,8 +11,12 @@ class LoggingStream {
   }
 }
 
-export const middlewareBinder = (app: Application): void => {
+export const preMiddlewareBinder = (app: Application): void => {
   app.use(helmet());
-  app.use(authorization);
   app.use(morgan('tiny', { stream: new LoggingStream() }));
+  app.use(authorization);
+};
+
+export const postMiddlewareBinder = (app: Application): void => {
+  app.use(errorHandler);
 };

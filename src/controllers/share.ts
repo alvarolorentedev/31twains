@@ -7,7 +7,7 @@ export const share = Router();
 
 share
   .route('/:shareId')
-  .get(async (request: CustomRequest, response: Response) => {
+  .get((request: CustomRequest, response: Response) => {
     response.send({
       quote: getQuoteFromLink(request.params.shareId),
     });

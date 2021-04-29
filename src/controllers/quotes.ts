@@ -8,7 +8,7 @@ export const quotes = Router();
 
 quotes
   .route('/')
-  .get(async (request: CustomRequest, response: Response) => {
+  .get((request: CustomRequest, response: Response) => {
     response.send({
       user: request.user,
       quotes: getQuotesForUser(request.user),
@@ -18,14 +18,14 @@ quotes
 
 quotes
   .route('/:quoteId')
-  .get(async (request: CustomRequest, response: Response) => {
+  .get((request: CustomRequest, response: Response) => {
     response.send(getQuoteForUserById(request.user, request.params.quoteId));
   })
   .all(methodNotAllowed);
 
 quotes
   .route('/:quoteId/share')
-  .get(async (request: CustomRequest, response: Response) => {
+  .get((request: CustomRequest, response: Response) => {
     const quote = getQuoteForUserById(request.user, request.params.quoteId);
     const shareId = createLinkToQuote(quote.quote);
     response.send({

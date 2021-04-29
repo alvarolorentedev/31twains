@@ -1,8 +1,15 @@
 import * as express from 'express';
-import { middlewareBinder } from './binders/middleware-binder';
+import { handle } from 'express-exception-handler';
+import {
+  postMiddlewareBinder,
+  preMiddlewareBinder,
+} from './binders/middleware-binder';
 import { routesBinder } from './binders/routes-binder';
+
+handle();
 
 export const app = express();
 
-middlewareBinder(app);
+preMiddlewareBinder(app);
 routesBinder(app);
+postMiddlewareBinder(app);
