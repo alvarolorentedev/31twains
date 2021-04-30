@@ -13,8 +13,8 @@ const BasicTokenAuth = (request: CustomRequest): AuthorizationInfo => {
   const base64Token = request.headers.authorization.replace('Basic ', '');
   const [user, password] = Buffer.from(base64Token, 'base64')
     .toString('utf-8')
-    .split(':');
-  if (user !== process.env.USERNAME && password !== process.env.PASSWORD)
+      .split(':');
+  if (user !== process.env.USERNAME || password !== process.env.PASSWORD)
     throw new InvalidToken('Wrong Credentials');
   return { user };
 };
